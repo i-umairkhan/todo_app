@@ -7,9 +7,10 @@ import { SignInUser } from "../../firebase";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   return (
     <div className="login">
-      <h2>LogIn</h2>
+      <h2>Login</h2>
       <TextField
         id="standard-basic"
         label="Email"

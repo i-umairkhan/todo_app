@@ -10,7 +10,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   return (
     <div className="signup">
-      <h2>Sign UP</h2>
+      <h2>Signup</h2>
       <TextField
         id="standard-basic"
         label="Email"
