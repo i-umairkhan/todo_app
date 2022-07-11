@@ -1,5 +1,5 @@
-import SignUp from "../Component/SignUp/SignUp";
-import Login from "../Component/Login/Login";
+import SignUp from "../../Component/SignUp/SignUp";
+import Login from "../../Component/Login/Login";
 import "./Auth.scss";
 import React from "react";
 

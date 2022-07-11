@@ -1,5 +1,6 @@
-import Auth from "./Pages/Auth";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Auth from "./Pages/Auth/Auth";
+import Home from "./Pages/Home/Home";
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Auth />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </>
