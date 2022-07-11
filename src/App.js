@@ -1,13 +1,16 @@
 import "./App.scss";
-import SignUp from "./Component/SignUp/SignUp";
-import Login from "./Component/Login/Login";
+import Auth from "./Pages/Auth";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="app">
-      <SignUp />
-      <Login />
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Auth />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
