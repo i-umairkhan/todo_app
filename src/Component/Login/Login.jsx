@@ -5,9 +5,15 @@ import { useState } from "react";
 import { SignInUser } from "../../firebase";
 
 const Login = () => {
+  // state to store inputs of email and password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  // to login user function
+  const handleSubmit = async () => {
+    SignInUser(email, password);
+    setEmail("");
+    setPassword("");
+  };
   return (
     <div className="login">
       <h2>Login</h2>
@@ -29,11 +35,7 @@ const Login = () => {
       />
       <Button // sign up button
         variant="outlined"
-        onClick={async () => {
-          SignInUser(email, password);
-          setEmail("");
-          setPassword("");
-        }}
+        onClick={handleSubmit}
       >
         Login
       </Button>

@@ -30,8 +30,7 @@ export const createUser = async (email, password) => {
 export const SignInUser = async (email, password) => {
   await signInWithEmailAndPassword(auth, email, password).then(
     (userCredential) => {
-      const user = userCredential.user;
-      console.log(user);
+      console.log(userCredential);
     }
   );
 };
