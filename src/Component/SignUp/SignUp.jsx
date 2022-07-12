@@ -8,6 +8,12 @@ const SignUp = () => {
   // state to handle email and password inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // to handle submit functionality
+  const handleSubmit = async () => {
+    await createUser(email, password);
+    setEmail("");
+    setPassword("");
+  };
   return (
     <div className="signup">
       <h2>Signup</h2>
@@ -29,11 +35,7 @@ const SignUp = () => {
       />
       <Button // sign up button
         variant="outlined"
-        onClick={async () => {
-          await createUser(email, password);
-          setEmail("");
-          setPassword("");
-        }}
+        onClick={handleSubmit}
       >
         Signup
       </Button>

@@ -1,8 +1,9 @@
 import "./Login.scss";
 import React from "react";
 import { TextField, Button } from "@mui/material";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { SignInUser } from "../../firebase";
+import { userContext } from "../../Context/User";
 
 const Login = () => {
   // state to store inputs of email and password
