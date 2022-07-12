@@ -10,6 +10,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   // to handle submit functionality
   const handleSubmit = async () => {
+    // sign up user
     await createUser(email, password);
     setEmail("");
     setPassword("");
