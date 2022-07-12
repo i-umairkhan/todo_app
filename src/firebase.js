@@ -28,9 +28,11 @@ export const createUser = async (email, password) => {
 
 // to Signin a user with email and paassword
 export const SignInUser = async (email, password) => {
+  let data;
   await signInWithEmailAndPassword(auth, email, password).then(
     (userCredential) => {
-      console.log(userCredential);
+      data = userCredential;
     }
   );
+  return data; // returning data got from firebase
 };

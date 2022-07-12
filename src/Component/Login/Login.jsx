@@ -9,9 +9,13 @@ const Login = () => {
   // state to store inputs of email and password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // to get context value from userContext
+  const userAPI = useContext(userContext);
+  const { user, setUser } = userAPI;
   // to login user function
   const handleSubmit = async () => {
-    SignInUser(email, password);
+    const userData = await SignInUser(email, password);
+    setUser(userData); // setting userdata from firebase to contextapi user
     setEmail("");
     setPassword("");
   };
