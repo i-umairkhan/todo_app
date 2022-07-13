@@ -18,15 +18,34 @@ const Login = () => {
   // to login user function
   const handleSubmit = async () => {
     // getting data from firebase
-    const userData = await SignInUser(email, password);
-    setUser(userData); // setting userdata from firebase to contextapi user
-    setEmail("");
-    setPassword("");
-    navigate("/home");
+    try {
+      const userData = await SignInUser(email, password);
+      setUser(userData); // setting userdata from firebase to contextapi user
+      setEmail("");
+      setPassword("");
+      navigate("/home");
+    } catch (error) {
+      // error cheacking
+      switch (error.code) {
+        case "auth/user-not-found": // user not found error
+          alert("User Not Found");
+          break;
+        case "auth/wrong-password": // wrong password wrror
+          alert("Wrong Password");
+          break;
+        case "auth/invalid-email": // invalid email error
+          alert("Invalid Email");
+          break;
+        default:
+          console.log(error);
+          break;
+      }
+    }
   };
   return (
     <div className="login">
       <h2>Login</h2>
+      {/* Email text feild */}
       <TextField
         id="standard-basic"
         label="Email"
@@ -35,6 +54,7 @@ const Login = () => {
         value={email}
         onChange={(event) => setEmail(event.target.value)}
       />
+      {/* password text feild */}
       <TextField
         id="standard-basic"
         label="Passwrd"

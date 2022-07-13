@@ -11,13 +11,36 @@ const SignUp = () => {
   // to handle submit functionality
   const handleSubmit = async () => {
     // sign up user
-    await createUser(email, password);
-    setEmail("");
-    setPassword("");
+    try {
+      await createUser(email, password);
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      // if error occuers
+      switch (error.code) {
+        // email alredy used error
+        case "auth/email-already-in-use":
+          alert("Email Alredy Used");
+          break;
+        // weak password error
+        case "auth/weak-password":
+          alert("Weak Password");
+          break;
+        // invalid email error
+        case "auth/invalid-email":
+          alert("Invalid Email");
+          break;
+        // default error
+        default:
+          console.log(error);
+          break;
+      }
+    }
   };
   return (
     <div className="signup">
       <h2>Signup</h2>
+      {/* Text feild for email*/}
       <TextField
         id="standard-basic"
         label="Email"
@@ -26,6 +49,7 @@ const SignUp = () => {
         value={email}
         onChange={(event) => setEmail(event.target.value)}
       />
+      {/* Text feild for password*/}
       <TextField
         id="standard-basic"
         label="Password"

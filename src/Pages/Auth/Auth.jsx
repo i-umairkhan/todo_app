@@ -9,7 +9,7 @@ const Auth = () => {
   return (
     <div className="auth">
       <SignUp />
-      <Divider orientation="vertical" variant="middlei">
+      <Divider orientation="vertical">
         <Chip label="TODO APP" />
       </Divider>
       <Login />
