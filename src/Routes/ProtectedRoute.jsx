@@ -2,7 +2,6 @@ import React from "react";
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { userContext } from "../Context/User";
-import Auth from "../Pages/Auth/Auth";
 
 // Protected route to cheack fro user loged inn
 const ProtectedRoute = () => {

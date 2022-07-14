@@ -4,13 +4,17 @@ import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 
 const Home = () => {
+  // input feild to write todo
   const [todoInput, setTodoInput] = useState("");
+  // array to store all todos
   const [todoList, setTodoList] = useState([]);
+  // to handle add button functionality
   const onAddHandler = () => {
+    // if todoinput exsists then set todoList to all previous + new todo
     todoInput
       ? setTodoList((pre) => [...pre, todoInput])
       : setTodoList((pre) => [...pre]);
-    setTodoInput("");
+    setTodoInput(""); // clear input
   };
   return (
     <div className="home">
@@ -32,7 +36,9 @@ const Home = () => {
           +
         </Button>
       </div>
+      {/* List to show todos */}
       <div className="list">
+        {/* Mapping over list  and displaying every todo item*/}
         {todoList.map((item) => {
           return (
             <div className="list__item" key={todoList.indexOf(item)}>
