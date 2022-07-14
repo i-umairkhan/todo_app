@@ -65,6 +65,7 @@ const Login = () => {
       />
       <Button // sign up button
         variant="outlined"
+        className="login__button"
         onClick={handleSubmit}
       >
         Login

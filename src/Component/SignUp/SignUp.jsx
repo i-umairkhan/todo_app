@@ -60,6 +60,7 @@ const SignUp = () => {
       />
       <Button // sign up button
         variant="outlined"
+        className="signup__button"
         onClick={handleSubmit}
       >
         Signup
