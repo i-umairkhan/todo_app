@@ -20,11 +20,14 @@ const Auth = () => {
   }, []);
   return (
     <div className="auth">
-      <SignUp />
-      <Divider orientation="vertical">
-        <Chip label="TODO APP" />
-      </Divider>
-      <Login />
+      <h1>todo app</h1>
+      <div className="auth__components">
+        <SignUp />
+        <Divider orientation="vertical">
+          <Chip label="Login To Continue..." />
+        </Divider>
+        <Login />
+      </div>
     </div>
   );
 };
