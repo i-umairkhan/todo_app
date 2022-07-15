@@ -9,7 +9,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .add__button {
     color: black !important;
@@ -26,6 +26,18 @@
       letter-spacing: 1px;
       background-color: rgba(0, 0, 0, 0.057);
       border-bottom: 1px solid white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .icons {
+        opacity: 0.6;
+        width: 50px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .icons > * {
+        cursor: pointer;
+      }
     }
   }
 }

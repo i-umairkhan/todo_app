@@ -1,5 +1,6 @@
 import "./Home.scss";
-
+import CloseIcon from "@mui/icons-material/Close";
+import EditIcon from "@mui/icons-material/Edit";
 import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 
@@ -15,6 +16,13 @@ const Home = () => {
       ? setTodoList((pre) => [...pre, todoInput])
       : setTodoList((pre) => [...pre]);
     setTodoInput(""); // clear input
+  };
+  // //  delet todo function
+  const handleDelet = (index) => {
+    const newList = todoList.filter((ele) => {
+      return todoList.indexOf(ele) !== index;
+    });
+    setTodoList(newList);
   };
   return (
     <div className="home">
@@ -44,6 +52,13 @@ const Home = () => {
             <div className="list__item" key={todoList.indexOf(item)}>
               {todoList.indexOf(item) + 1} {` . `}
               {item}
+              <div className="icons">
+                <EditIcon fontSize="8px" />
+                <CloseIcon
+                  fontSize="8px"
+                  onClick={() => handleDelet(todoList.indexOf(item))}
+                />
+              </div>
             </div>
           );
         })}
