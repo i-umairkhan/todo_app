@@ -6,7 +6,7 @@ export const userContext = createContext({
   setUser: () => null,
 });
 
-// provider for userVContext
+// provider for userContext
 export const UserProvider = ({ children }) => {
   // state to user loged in data
   const [user, setUser] = useState(null);
