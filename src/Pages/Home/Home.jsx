@@ -3,7 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import DoneIcon from "@mui/icons-material/Done";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import React, { useState } from "react";
-import { Button, Chip, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
 const Home = () => {
   // input feild to write todo in input box
