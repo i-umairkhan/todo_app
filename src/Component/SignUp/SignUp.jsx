@@ -2,7 +2,7 @@ import "./SignUp.scss";
 import React from "react";
 import { TextField, Button } from "@mui/material";
 import { useState } from "react";
-import { createUser } from "../../firebase";
+import { createUser, createUserInDataBase } from "../../firebase";
 
 const SignUp = () => {
   // state to handle email and password inputs
@@ -12,7 +12,10 @@ const SignUp = () => {
   const handleSubmit = async () => {
     // sign up user
     try {
+      // creating user in auth service
       await createUser(email, password);
+      // creating initial user document in database
+      await createUserInDataBase(email, []);
       setEmail("");
       setPassword("");
     } catch (error) {

@@ -2,14 +2,18 @@ import "./Home.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import DoneIcon from "@mui/icons-material/Done";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, TextField } from "@mui/material";
+import { userContext } from "../../Context/User";
 
 const Home = () => {
   // input feild to write todo in input box
   const [todoInput, setTodoInput] = useState("");
   // array to store all todos
   const [todoList, setTodoList] = useState([]);
+  // get current email address of logedinn user
+  const userAPI = useContext(userContext); // user context
+  const userEmail = userAPI.user.user.email; // email of current user
 
   // to handle add button functionality
   const onAddHandler = () => {
@@ -39,6 +43,10 @@ const Home = () => {
     });
     setTodoList(newList);
   };
+
+  useEffect(() => {
+    console.log(userEmail);
+  }, []);
 
   return (
     <div className="home">

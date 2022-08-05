@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { getFirestore, collection, addDoc,getDoc } from "firebase/firestore";
 
 // Firebase config
 const firebaseConfig = {
@@ -20,7 +21,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // to get auth
-const auth = getAuth();
+const auth = getAuth(app);
+
+// to get firestore database of our application
+const db = getFirestore(app);
 
 // to create a user with email and paassword
 export const createUser = async (email, password) => {
@@ -45,3 +49,17 @@ export const SignInUser = async (email, password) => {
 export const SignOutUser = async () => {
   await signOut(auth).then(() => console.log("Signed out user"));
 };
+
+// to add a document to firestore database
+export const createUserInDataBase = async (email, todo) => {
+  try {
+    const docRef = await addDoc(collection(db, "users"), {
+      email: email,
+      todos: todo,
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.log("Error adding document: ", e);
+  }
+};
+
