@@ -5,6 +5,7 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { userContext } from "../../Context/User";
+import { getTodoFromDataBase } from "../../firebase";
 
 const Home = () => {
   // input feild to write todo in input box
@@ -45,8 +46,9 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log(userEmail);
-  }, []);
+    const getTodo = async () => await getTodoFromDataBase(userEmail);
+    getTodo();
+  }, [userEmail]); 
 
   return (
     <div className="home">

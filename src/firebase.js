@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc,getDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 
 // Firebase config
 const firebaseConfig = {
@@ -63,3 +63,13 @@ export const createUserInDataBase = async (email, todo) => {
   }
 };
 
+// to get todo from database for a paticualr email
+export const getTodoFromDataBase = async (email) => {
+  try {
+    const collectionRef = collection(db, "users");
+    let allDocs = await getDocs(collectionRef);
+    console.log(allDocs);
+  } catch (e) {
+    console.log(e);
+  }
+};
