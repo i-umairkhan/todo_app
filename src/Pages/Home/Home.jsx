@@ -5,7 +5,7 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { userContext } from "../../Context/User";
-import { getTodoFromDataBase } from "../../firebase";
+import { getTodoFromDataBase, updateTodoInDataBase } from "../../firebase";
 
 const Home = () => {
   // input feild to write todo in input box
@@ -17,25 +17,27 @@ const Home = () => {
   const userEmail = userAPI.user.user.email; // email of current user
 
   // to handle add button functionality
-  const onAddHandler = () => {
+  const onAddHandler = async () => {
     // if todoinput exsists then set todoList to all previous + new todo
     todoInput
       ? setTodoList((pre) => [...pre, { todo: todoInput, completed: false }])
       : setTodoList((pre) => [...pre]);
     setTodoInput(""); // clear input
+    // await updateTodoInDataBase(userEmail, todoList);
   };
 
   //   delet todo function
-  const handleDelet = (index) => {
+  const handleDelet = async (index) => {
     // create new todo list with all todos except of which index passed and set to todoList
     const newList = todoList.filter((ele) => {
       return todoList.indexOf(ele) !== index;
     });
     setTodoList(newList);
+    // await updateTodoInDataBase(userEmail, newList);
   };
 
   //   done todo function
-  const handleDone = (index) => {
+  const handleDone = async (index) => {
     // create new todo list with all todos as same except of which index passed -> completed -> toggle
     const newList = todoList.map((ele) => {
       return todoList.indexOf(ele) === index
@@ -43,12 +45,25 @@ const Home = () => {
         : ele;
     });
     setTodoList(newList);
+    // await updateTodoInDataBase(userEmail, newList);
   };
 
+  // useEffect to get data from database when component loads
   useEffect(() => {
-    const getTodo = async () => await getTodoFromDataBase(userEmail);
+    // function to get data from data base for currently loged in email
+    const getTodo = async () => {
+      const data = await getTodoFromDataBase(userEmail);
+      console.log(data);
+      setTodoList(data);
+    };
     getTodo();
-  }, [userEmail]); 
+  }, []);
+  useEffect(() => {
+    const updateDataBase = async () => {
+      await updateTodoInDataBase(userEmail, todoList);
+    };
+    updateDataBase();
+  }, [todoList]);
 
   return (
     <div className="home">

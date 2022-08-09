@@ -5,7 +5,15 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  setDoc,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 
 // Firebase config
 const firebaseConfig = {
@@ -67,9 +75,35 @@ export const createUserInDataBase = async (email, todo) => {
 export const getTodoFromDataBase = async (email) => {
   try {
     const collectionRef = collection(db, "users");
-    let allDocs = await getDocs(collectionRef);
-    console.log(allDocs);
+    const allDocs = await getDocs(collectionRef);
+    let todos; // to get todos for that email from firestore
+    allDocs.forEach((doc) => {
+      // searching for document with email and setting todos from firestore
+      if (doc.data().email == email) {
+        todos = doc.data().todos;
+        console.log("fetched data");
+      }
+    });
+    return todos;
   } catch (e) {
-    console.log(e);
+    console.log("error fetching data", e);
+  }
+};
+
+// update todo in firestore
+export const updateTodoInDataBase = async (email, todoList) => {
+  try {
+    const collectionRef = collection(db, "users");
+    const allDocs = await getDocs(collectionRef);
+    let docID; // to get doc id for that document with email
+    allDocs.forEach((doc) => {
+      if (doc.data().email == email) {
+        docID = doc.id;
+      }
+    });
+    const docRef = doc(db, "users", docID); // doc refrence with our email
+    await updateDoc(docRef, { email, todos: todoList }); // updating todolist with new one
+  } catch (e) {
+    console.log("error updating document", e);
   }
 };
